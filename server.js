@@ -16,13 +16,13 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var config  = require("./config/config.js");
 
 // mongo
-var mongo   =   require("mongodb").MongoClient;
+/*var mongo   =   require("mongodb").MongoClient;
 var mongoPort       = config.mongoPort;
 var mongoDatabase   = config.mongoDatabase;
 var mongoCollectionName = config.mongoCollectionName;
 console.log(mongoCollectionName);
 var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
-
+*/
 var bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({extended: false}));

@@ -10,7 +10,6 @@ User Story: I can get a list of the most recently submitted search strings.
 */
 
 //express
-//var path    = require("path");
 var express = require("express");
 var app     = express();
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -24,12 +23,16 @@ var mongoCollectionName = config.mongoCollectionName;
 console.log(mongoCollectionName);
 var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
 
-/*
-app.get("/", function(req, res){
-    res.write("New Page Working");
-    res.end();
+var bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.post("/new", function(req, res){
+    var body = req.body;
+    console.log( body );
+
+    res.end("submitted");
+
 });
-*/
 
 //static files
 app.use(express.static('./public'));

@@ -10,12 +10,10 @@ var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
 
 
 
-exports.insertDoc = function(document, frm){
+exports.insertDoc = function(document, res){
     var db = mongo.connect(mongoUrl);
-
-
     mongo.connect(mongoUrl, function(err, db){
-    //        if(err){console.error(err)};
+        if(err){console.error(err)};
         var collection = db.collection(mongoCollectionName);
         collection.insertOne(document, function(err){
             if(err){console.error(err)}
@@ -23,16 +21,10 @@ exports.insertDoc = function(document, frm){
             {},
             function(err, document){
                 if(err){console.error(err)};
-                //console.log(JSON.stringify(document));
-                frm = (JSON.stringify(document));
-                
+                res(null, document);
                 db.close();
-            })
+            });
         });
     });
-
-    
-    //console.log(response);
-
-    //return db;
 }
+

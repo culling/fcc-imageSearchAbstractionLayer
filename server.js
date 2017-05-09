@@ -16,16 +16,6 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var config  = require("./config/config.js");
 
 
-
-// mongo
-/*var mongo   =   require("mongodb").MongoClient;
-var mongoPort       = config.mongoPort;
-var mongoDatabase   = config.mongoDatabase;
-var mongoCollectionName = config.mongoCollectionName;
-console.log(mongoCollectionName);
-var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
-*/
-
 var mongoExport = require("./config/mongo");
 
 
@@ -35,16 +25,19 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: false}));
 app.post("/new", function(req, res){
     var body = req.body;
-    console.log( body );
+
+    var newDoc = {
+        "url":      body.url,
+        "alt-text": body["alt-text"],
+        "original-page": body["original-page"],
+        "submitted": new Date()
+    }
 
 
-    
-    mongoExport.insertDoc(body, function(frm){
-        console.log(frm);
-    } );
-
-
-
+    mongoExport.insertDoc(newDoc, function(err, returnedDocument){
+        if(err){console.error(err)}
+        console.log(returnedDocument);
+    });
 
 
     res.end("submitted");

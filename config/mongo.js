@@ -8,10 +8,31 @@ var mongoCollectionName = config.mongoCollectionName;
 console.log(mongoCollectionName);
 var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
 
-module.exports = function(){
+
+
+exports.insertDoc = function(document, frm){
     var db = mongo.connect(mongoUrl);
 
-    
 
-    return db;
+    mongo.connect(mongoUrl, function(err, db){
+    //        if(err){console.error(err)};
+        var collection = db.collection(mongoCollectionName);
+        collection.insertOne(document, function(err){
+            if(err){console.error(err)}
+            collection.findOne(document,
+            {},
+            function(err, document){
+                if(err){console.error(err)};
+                //console.log(JSON.stringify(document));
+                frm = (JSON.stringify(document));
+                
+                db.close();
+            })
+        });
+    });
+
+    
+    //console.log(response);
+
+    //return db;
 }

@@ -38,18 +38,11 @@ app.post("/new", function(req, res){
         if(err){console.error(err)}
         console.log(returnedDocument);
     });
-
-
     res.end("submitted");
-
 });
 
-
-//var db = mongoExport();
-//console.log( db );
-//require("./app/models/images.server.model");
-
-
+var api = require("./app/routes/api");
+app.use("/api", api);
 
 //static files
 app.use(express.static('./public'));

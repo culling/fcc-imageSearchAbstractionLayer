@@ -1,7 +1,7 @@
 //https://www.terlici.com/2014/08/25/best-practices-express-structure.html
 
 //var mongo = require(mongo);
-
+/*
 var config  = require("./../../config/config.js");
 
 
@@ -27,3 +27,4 @@ collection.insertOne(document, function(err){
 });
 //    })
 //}
+*/

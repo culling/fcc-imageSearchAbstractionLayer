@@ -2,9 +2,7 @@ var express = require('express');
 var router = express.Router();
 var config  = require("./../../config/config");
 
-
 var mongoExport = require("./../../config/mongo");
-
 
 router.get("/", function(req, res){
     res.write("API Query");
@@ -37,8 +35,21 @@ router.post("/images/search", function(req, res){
         });
         //res.write( JSON.stringify(req.body));
         res.end();
-    });
-    
+    }); 
 });
+
+router.post("/search/", function(req, res){
+    //console.log(req.body["search-text"] );
+    var searchText = req.body["search-text"];
+    mongoExport.search.retrieve( searchText , 0, function(foundDocs ){
+        foundDocs.forEach(function(foundDoc){
+            //console.log(foundDoc);
+            res.write(JSON.stringify(foundDoc) + "\n");
+        });
+        //res.write( JSON.stringify(req.body));
+        res.end();
+    }); 
+});
+
 
 module.exports = router;

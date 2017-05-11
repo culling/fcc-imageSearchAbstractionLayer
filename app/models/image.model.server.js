@@ -35,6 +35,8 @@ exports.create = function(document, res ){
 exports.retrieve = function(searchText,offset, res){
     //console.log(collectionName);
     //console.log(searchText);
+    console.log("Offset: " +offset);
+    
     var query = { "alt-text" : {$regex:  '.*'+searchText+".*" } };
     var db = mongo.connect(mongoUrl);
     mongo.connect(mongoUrl, function(err, db){

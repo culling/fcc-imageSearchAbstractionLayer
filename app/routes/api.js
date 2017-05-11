@@ -23,7 +23,6 @@ router.post("/images/search", function(req, res){
         });
         //res.write( JSON.stringify(req.body));
         res.end();
-
     });
     
 });

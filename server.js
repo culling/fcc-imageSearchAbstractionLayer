@@ -34,7 +34,7 @@ app.post("/new", function(req, res){
     }
 
     var collectionName = config.mongoCollectionName;
-    mongoExport.create(newDoc, collectionName , function(err, returnedDocument){
+    mongoExport.image.create(newDoc, collectionName , function(err, returnedDocument){
         if(err){console.error(err)}
         console.log(returnedDocument);
     });

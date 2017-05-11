@@ -11,10 +11,21 @@ router.get("/", function(req, res){
     res.end();
 });
 
-router.get("/images/:id", function(req, res){
-    res.write( req.params.id )
-    res.end();
+router.post("/images/new", function(req, res){
+    var body = req.body;
+    var newDoc = {
+        "url":      body.url,
+        "alt-text": body["alt-text"],
+        "original-page": body["original-page"],
+        "submitted": new Date()
+    }
+    mongoExport.image.create(newDoc, function(err, returnedDocument){
+        if(err){console.error(err)}
+        console.log(returnedDocument);
+    });
+    res.end("submitted");
 });
+
 
 router.post("/images/search", function(req, res){
     //console.log(req.body["search-text"] );

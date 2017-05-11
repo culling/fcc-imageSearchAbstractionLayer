@@ -18,27 +18,9 @@ var config  = require("./config/config.js");
 
 var mongoExport = require("./config/mongo");
 
-
-
-
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: false}));
-app.post("/new", function(req, res){
-    var body = req.body;
 
-    var newDoc = {
-        "url":      body.url,
-        "alt-text": body["alt-text"],
-        "original-page": body["original-page"],
-        "submitted": new Date()
-    }
-
-    mongoExport.image.create(newDoc, function(err, returnedDocument){
-        if(err){console.error(err)}
-        console.log(returnedDocument);
-    });
-    res.end("submitted");
-});
 
 var api = require("./app/routes/api");
 app.use("/api", api);

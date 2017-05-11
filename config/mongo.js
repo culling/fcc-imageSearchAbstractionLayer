@@ -6,16 +6,17 @@ var mongoPort       = config.mongoPort;
 var mongoDatabase   = config.mongoDatabase;
 var mongoCollectionName = config.mongoCollectionName;
 var mongoMaxReturnedDocs = config.mongoMaxReturnedDocs
-console.log(mongoCollectionName);
+//console.log(collectionName);
 var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
 
 
 
-exports.insertDoc = function(document, res){
+exports.create = function(document, collectionName, res ){
+  console.log(collectionName);
     var db = mongo.connect(mongoUrl);
     mongo.connect(mongoUrl, function(err, db){
         if(err){console.error(err)};
-        var collection = db.collection(mongoCollectionName);
+        var collection = db.collection( collectionName );
         collection.insertOne(document, function(err){
             if(err){console.error(err)}
             collection.findOne(document,
@@ -31,23 +32,24 @@ exports.insertDoc = function(document, res){
 
 
 
-exports.retrieve = function(searchText,offset, res){
-    //var query = { "alt-text" : new RegExp("/.*" + searchText + ".*/") };
+exports.retrieve = function(searchText,offset, collectionName, res){
+console.log(collectionName);
+    console.log(searchText);
     var query = { "alt-text" : {$regex:  '.*'+searchText+".*" } };
     var db = mongo.connect(mongoUrl);
     mongo.connect(mongoUrl, function(err, db){
         if(err){console.error(err)};
-        var collection = db.collection(mongoCollectionName);
+        var collection = db.collection(collectionName);
 
         collection.find(query).toArray(function (err, results){
         //collection.find({}).toArray(function (err, results){
             if (results.length > 0){
-                //console.log(results );
+                console.log(results );
                 res(results);
+            }else{
+                res([{}]);
             }
             db.close();
         });
-
-
     });
 }

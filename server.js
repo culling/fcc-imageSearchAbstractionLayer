@@ -33,8 +33,8 @@ app.post("/new", function(req, res){
         "submitted": new Date()
     }
 
-
-    mongoExport.insertDoc(newDoc, function(err, returnedDocument){
+    var collectionName = config.mongoCollectionName;
+    mongoExport.create(newDoc, collectionName , function(err, returnedDocument){
         if(err){console.error(err)}
         console.log(returnedDocument);
     });

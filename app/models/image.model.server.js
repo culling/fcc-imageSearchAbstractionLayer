@@ -1,18 +1,18 @@
 var config  = require("./../../config/config");
 
 // mongo
-var mongo   =   require("mongodb").MongoClient;
-var mongoPort       = config.mongoPort;
-var mongoDatabase   = config.mongoDatabase;
-var mongoCollectionName = config.mongoCollectionName;
-var mongoMaxReturnedDocs = config.mongoMaxReturnedDocs
+var mongo               =   require("mongodb").MongoClient;
+var mongoPort           = config.mongoPort;
+var mongoDatabase       = config.mongoDatabase;
+var collectionName      = "imagecollection";
+var mongoMaxReturnedDocs = 10;
 //console.log(collectionName);
 var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
 
 
 
-exports.create = function(document, collectionName, res ){
-  console.log(collectionName);
+exports.create = function(document, res ){
+  //console.log(collectionName);
     var db = mongo.connect(mongoUrl);
     mongo.connect(mongoUrl, function(err, db){
         if(err){console.error(err)};
@@ -32,9 +32,9 @@ exports.create = function(document, collectionName, res ){
 
 
 
-exports.retrieve = function(searchText,offset, collectionName, res){
-console.log(collectionName);
-    console.log(searchText);
+exports.retrieve = function(searchText,offset, res){
+    //console.log(collectionName);
+    //console.log(searchText);
     var query = { "alt-text" : {$regex:  '.*'+searchText+".*" } };
     var db = mongo.connect(mongoUrl);
     mongo.connect(mongoUrl, function(err, db){

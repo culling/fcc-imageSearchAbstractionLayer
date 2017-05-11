@@ -17,10 +17,9 @@ router.get("/images/:id", function(req, res){
 });
 
 router.post("/images/search", function(req, res){
-    var mongoCollectionName = config.mongoCollectionName;
     //console.log(req.body["search-text"] );
     var searchText = req.body["search-text"];
-    mongoExport.image.retrieve( searchText , 0, mongoCollectionName, function(foundDocs ){
+    mongoExport.image.retrieve( searchText , 0, function(foundDocs ){
         foundDocs.forEach(function(foundDoc){
             //console.log(foundDoc);
             res.write(JSON.stringify(foundDoc) + "\n");

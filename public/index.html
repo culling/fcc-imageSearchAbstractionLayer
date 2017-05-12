@@ -27,33 +27,46 @@
     </head>
     <body>
         <div class="container">
-        
-
+        <br />
+        <h1> Free Code Camp </h1>
+        <h1> Image Abstraction Layer </h1>
+        <a href="https://www.freecodecamp.com/challenges/image-search-abstraction-layer">https://www.freecodecamp.com/challenges/image-search-abstraction-layer</a>
+        <br />
+        <br />
         <h2>Add a new image</h2>
         <form action="/api/images/new" method="post">
-            <div>
-                <label>URL</label>
-                <input type="text" name="url">
+             <div class="form-group row">
+                <label class="col-sm-2">Image URL</label>
+                <div class="col-sm-10">
+                    <input type="text" name="url" class="form-control" >
+                </div>
             </div>
 
-            <div>
-                <label>alt-text</label>
-                <input type="text" name="alt-text">
+             <div class="form-group row">
+                <label class="col-sm-2">alt-text</label>
+                <div class="col-sm-10">
+                    <input type="text" name="alt-text" class="form-control">
+                </div>
             </div>
 
-            <div>
-                <label>original page</label>
-                <input type="text" name="original-page">
+             <div class="form-group row">
+                <label class="col-sm-2">Original page</label>
+                <div class="col-sm-10">
+                    <input type="text" name="original-page" class="form-control">
+                </div>
             </div>
             <input type="submit" value="sumbit" >
         </form>
 
         <h2>Search for images</h2>
         <form action="/api/images/search/new" method="get">
-            <div>
-                <label>Search Text</label>
-                <input type="text" name="search-text">
+             <div class="form-group row">
+                <label class="col-sm-2">Search Text</label>
+                <div class="col-sm-10">
+                    <input type="text" name="search-text" class="form-control">
+                </div>
             </div>
+
 
             <input type="submit" value="sumbit" >
         </form>

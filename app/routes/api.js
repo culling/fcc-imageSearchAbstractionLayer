@@ -24,10 +24,15 @@ router.post("/images/new", function(req, res){
     res.end("submitted");
 });
 
-
-router.post("/images/search", function(req, res){
+//Allowing for the query to be modified as a get request
+router.get("/images/search", function(req, res){
     //console.log(req.body["search-text"] );
-    var searchText = req.body["search-text"];
+    //var searchText = req.body["search-text"];
+    var queryParts = req.url.split("?");
+    var query = queryParts[queryParts.length -1 ];
+    var searchText = query.split("search-text=")[query.split("search-text=").length -1];
+    console.log(searchText);
+
     mongoExport.image.retrieve( searchText , 0, function(foundDocs ){
         foundDocs.forEach(function(foundDoc){
             //console.log(foundDoc);

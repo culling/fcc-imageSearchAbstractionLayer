@@ -30,14 +30,15 @@ exports.create = function(document, res ){
     });
 }
 
-exports.retrieve = function(searchText,offset, res){
+exports.retrieve = function(offset, res){
+    var limit = 5;
     var query = {} ;
     var db = mongo.connect(mongoUrl);
     mongo.connect(mongoUrl, function(err, db){
         if(err){console.error(err)};
         var collection = db.collection(collectionName);
 
-        collection.find(query).sort({"submitted": -1}).limit(5).toArray(function (err, results){
+        collection.find(query).sort({"submitted": -1}).skip(limit * offset).limit(limit).toArray(function (err, results){
         //collection.find({}).toArray(function (err, results){
             if (results.length > 0){
                 console.log(results );

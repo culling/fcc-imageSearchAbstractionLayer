@@ -5,7 +5,7 @@ var mongo               =   require("mongodb").MongoClient;
 var mongoPort           = config.mongoPort;
 var mongoDatabase       = config.mongoDatabase;
 var collectionName      = "imagecollection";
-var mongoMaxReturnedDocs = 10;
+var limit = 10;
 //console.log(collectionName);
 var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
 
@@ -43,7 +43,7 @@ exports.retrieve = function(searchText,offset, res){
         if(err){console.error(err)};
         var collection = db.collection(collectionName);
 
-        collection.find(query).toArray(function (err, results){
+        collection.find(query).sort({"submitted": -1}).skip(limit * offset).limit(limit).toArray(function (err, results){
         //collection.find({}).toArray(function (err, results){
             if (results.length > 0){
                 console.log(results );

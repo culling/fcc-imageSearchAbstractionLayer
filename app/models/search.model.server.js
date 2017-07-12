@@ -6,7 +6,7 @@ var mongoPort           = config.mongoPort;
 var mongoDatabase       = config.mongoDatabase;
 var collectionName      = "search";
 //console.log(collectionName);
-var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
+var mongoUrl =  config.mongoUrl || `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
 
 
 

@@ -5,7 +5,7 @@ var mongo               =   require("mongodb").MongoClient;
 var mongoPort           = config.mongoPort;
 var mongoDatabase       = config.mongoDatabase;
 var collectionName      = "imagecollection";
-var mongoUrl =  `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
+var mongoUrl =          config.mongoUrl || `mongodb://localhost:${mongoPort}/${mongoDatabase}`;
 
 
 
